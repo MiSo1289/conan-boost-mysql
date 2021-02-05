@@ -9,6 +9,10 @@ class BoostMysql(ConanFile):
     revision_mode = "scm"
     url = "https://github.com/anarthal/mysql"
     license = "BSL-1.0"
+    requires = (
+        f"boost/{version}",
+        "openssl/1.1.1i",
+    )
 
     source_subfolder = "sources"
     scm = {
@@ -19,7 +23,7 @@ class BoostMysql(ConanFile):
     }
 
     def package(self):
-        self.copy("*.hpp", dst="include", src=os.path.join(source_subfolder, "include"))
+        self.copy("*.hpp", dst="include", src=os.path.join(self.source_subfolder, "include"))
 
     def package_id(self):
         self.info.header_only()
